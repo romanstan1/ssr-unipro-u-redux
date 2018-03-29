@@ -1,0 +1,8 @@
+dist
+lib
+node_modules
+*.log
+server.js.map
+server.js
+public/bundle.js.map
+public/bundle.js
