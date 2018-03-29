@@ -6,3 +6,6 @@ server.js.map
 server.js
 public/bundle.js.map
 public/bundle.js
+public/bundle.js.map
+public/main.css
+public/main.css.map
