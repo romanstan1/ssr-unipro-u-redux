@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import routes from "./routes";
+import routes from "./pages/routes";
 import "./styles/App.css";
 
 class App extends Component {
@@ -9,7 +9,7 @@ class App extends Component {
       <div>
         {routes.map((route, i) => <Route key={i} {...route} />)}
       </div>
-    );
+    )
   }
 }
 

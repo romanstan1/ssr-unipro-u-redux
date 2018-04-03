@@ -6,7 +6,7 @@
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
-    "start-dev": "NODE_ENV=development webpack -w & NODE_ENV=development nodemon server.js",
+    "start-dev": "NODE_ENV=development webpack -w & NODE_ENV=development nodemon server.js & node-debug",
     "start": "npm-run-all -p watch-css start-dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -33,6 +33,7 @@
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
     "babel-preset-react-app": "^3.0.1",
+    "babel-root-slash-import": "^1.1.0",
     "css-loader": "^0.28.4",
     "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",

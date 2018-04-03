@@ -5,7 +5,7 @@ import { renderToString } from "react-dom/server";
 import { Provider } from "react-redux";
 import { StaticRouter, matchPath } from "react-router-dom";
 import serialize from "serialize-javascript";
-import routes from "../shared/routes";
+import routes from "../shared/pages/routes";
 import configureStore from "../shared/store/configureStore";
 import App from "../shared/App";
 import "source-map-support/register";
@@ -15,7 +15,7 @@ const app = express();
 app.use(cors());
 app.use(express.static("public"));
 
-app.get("/api/news", (req, res) => {
+app.get("/api/categories", (req, res) => {
   res.json([
     {
       id: 1,
