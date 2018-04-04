@@ -9,100 +9,23 @@ import routes from "../shared/pages/routes";
 import configureStore from "../shared/store/configureStore";
 import App from "../shared/App";
 import "source-map-support/register";
-
+import "isomorphic-fetch";
+// require('es6-promise').polyfill();
+// import ampHtml from './amp-document'
 const app = express();
 
 app.use(cors());
 app.use(express.static("public"));
 
 app.get("/api/categories", (req, res) => {
-  res.json([
+
+  res.json(
     {
-      id: 1,
-      upvotes: 130,
-      title: "Fianto Duri, the complete tutorial",
-      author: "RubeusH",
-      date: new Date("2017-04-14T15:30:00.000Z")
-    },
-    {
-      id: 2,
-      upvotes: 126,
-      title: "Ordinary Wizarding Levels study guide",
-      author: "BathBabb",
-      date: new Date("2017-04-14T15:30:00.000Z")
-    },
-    {
-      id: 3,
-      upvotes: 114,
-      title: "Is muggle-baiting ever acceptable?",
-      author: "Falco",
-      date: new Date("2017-04-14T15:30:00.000Z")
-    },
-    {
-      id: 4,
-      upvotes: 97,
-      title: "Untransfiguration classes to become compulsory at Hogwarts",
-      author: "Baddock",
-      date: new Date("2017-04-14T15:30:00.000Z")
-    },
-    {
-      id: 5,
-      upvotes: 85,
-      title: "Cracking the Aurologist Interview ",
-      author: "Hetty",
-      date: new Date("2017-04-14T15:30:00.000Z")
-    },
-    {
-      id: 6,
-      upvotes: 74,
-      title: "Conserving waterplants cheatsheet.",
-      author: "Otto",
-      date: new Date("2017-04-14T15:30:00.000Z")
-    },
-    {
-      id: 7,
-      upvotes: 66,
-      title: "The Pragmatic Dragon Feeder",
-      author: "Baruffio",
-      date: new Date("2017-04-14T15:30:00.000Z")
-    },
-    {
-      id: 8,
-      upvotes: 50,
-      title: "The complete quidditch statistics",
-      author: "Hbeery",
-      date: new Date("2017-04-14T15:30:00.000Z")
-    },
-    {
-      id: 9,
-      upvotes: 34,
-      title: "Cracking the Aurologist Interview ",
-      author: "Marcusb",
-      date: new Date("2017-04-14T15:30:00.000Z")
-    },
-    {
-      id: 10,
-      upvotes: 29,
-      title: "Could wizards prevent WW3?",
-      author: "Cuthbert",
-      date: new Date("2017-04-14T15:30:00.000Z")
-    },
-    {
-      id: 11,
-      upvotes: 20,
-      title: "ASK WN: What do you use to digitalize your scrolls?",
-      author: "Alphard",
-      date: new Date("2017-04-14T15:30:00.000Z")
-    },
-    {
-      id: 12,
-      upvotes: 16,
-      title: "Show WN: Wand-Extinguishing Protection",
-      author: "Humphrey22",
-      date: new Date("2017-04-14T15:30:00.000Z")
+      "front-end-development": true,
+      "ux-design":true
     }
-  ]);
-});
+  )
+})
 
 app.get("*", (req, res, next) => {
   const store = configureStore();
@@ -116,7 +39,8 @@ app.get("*", (req, res, next) => {
 
   Promise.all(promises)
     .then(() => {
-      const context = {};
+      const initialData = store.getState();
+      const context = {initialData};
       const markup = renderToString(
         <Provider store={store}>
           <StaticRouter location={req.url} context={context}>
@@ -124,8 +48,63 @@ app.get("*", (req, res, next) => {
           </StaticRouter>
         </Provider>
       );
+      // <link rel="stylesheet" href="/css/main.css">
+      // <script src="/bundle.js" defer></script>
 
-      const initialData = store.getState();
+      // <script async src="https://cdn.ampproject.org/v0.js"></script>
+    //   res.send(`
+    // <!doctype html>
+    //   <html ⚡ lang="en">
+    //     <head>
+    //       <meta charset="utf-8" />
+    //       <link rel="canonical" href="/article.html">
+    //
+    //       <link rel="shortcut icon" href="amp_favicon.png">
+    //
+    //       <title>News Article</title>
+    //       <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    //
+    //       <script async src="https://cdn.ampproject.org/v0.js"></script>
+    //       <style amp-custom>
+    //
+    //         body {
+    //           width: auto;
+    //           margin: 0;
+    //           padding: 0;
+    //         }
+    //
+    //         header {
+    //           background: Tomato;
+    //           color: white;
+    //           font-size: 2em;
+    //           text-align: center;
+    //         }
+    //
+    //         h1 {
+    //           margin: 0;
+    //           padding: 0.5em;
+    //           background: white;
+    //           box-shadow: 0px 3px 5px grey;
+    //         }
+    //
+    //         p {
+    //           padding: 0.5em;
+    //           margin: 0.5em;
+    //         }
+    //
+    //       </style>
+    //       <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    //
+    //
+    //     </head>
+    //     <body>
+    //       <header>
+    //         News Site
+    //       </header>
+    //       <div id="root">${markup}</div>
+    //     </body>
+    //   </html>`);
+
       res.send(`
         <!DOCTYPE html>
         <html>
@@ -133,6 +112,7 @@ app.get("*", (req, res, next) => {
             <title>Unipro U</title>
             <link rel="stylesheet" href="/css/main.css">
             <script src="/bundle.js" defer></script>
+
             <script>window.__initialData__ = ${serialize(initialData)}</script>
           </head>
 

@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchNews } from "../../store/modules/api";
+import { fetchCategories } from "/shared/store/modules/api";
 import CategoriesList from "./CategoriesList";
 import Nav from '/shared/components/Nav'
 
 
 class Categories extends Component {
   static initialAction() {
-    return fetchNews();
+    return fetchCategories();
   }
 
   componentDidMount() {
@@ -17,7 +17,7 @@ class Categories extends Component {
   }
 
   render() {
-    const { categories } = this.props;
+    const { categories } = this.props
     return (
       <span>
         <Nav/>
@@ -27,8 +27,6 @@ class Categories extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+export default connect(state => ({
   categories: state.categories
-});
-
-export default connect(mapStateToProps)(Categories);
+}))(Categories);

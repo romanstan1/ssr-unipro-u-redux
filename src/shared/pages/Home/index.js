@@ -12,7 +12,7 @@ class Home extends Component {
           <Link to='/categories'>Log in</Link>
         </div>
       </div>
-    );
+    )
   }
 }
 

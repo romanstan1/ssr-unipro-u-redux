@@ -1,10 +1,22 @@
 import "isomorphic-fetch";
-import {requestNews, receivedNews, newsError} from './actions'
+import {receivedCategories, categoriesError} from './actions'
 
-export const fetchNews = () => (dispatch, getState) => {
-  dispatch(requestNews());
-  return fetch("http://localhost:3000/api/categories")
+const URL = 'https://unipro-u.firebaseio.com/'
+const SHALLOW = '?shallow=true'
+
+export const fetchCategories = () => (dispatch) => {
+  return fetch(URL + "categories.json" + SHALLOW)
+  // return fetch('http://localhost:3000/api/categories')
     .then(response => response.json())
-    .then(news => dispatch(receivedNews(news)))
-    .catch(err => dispatch(newsError(err)));
-};
+    .then(categories => dispatch(receivedCategories(categories)))
+    .catch(err => dispatch(categoriesError(err)))
+}
+
+
+export const fetchSubject = (params) => (dispatch) => {
+  // return fetch(URL + "categories.json" + SHALLOW)
+  // // return fetch('http://localhost:3000/api/categories')
+  //   .then(response => response.json())
+  //   .then(categories => dispatch(receivedCategories(categories)))
+  //   .catch(err => dispatch(categoriesError(err)))
+}
