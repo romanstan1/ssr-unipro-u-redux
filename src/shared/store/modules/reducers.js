@@ -1,4 +1,10 @@
 
+// const initialState = {
+//   categories: {
+//
+//   }
+// }
+
 
 // Reducer
 export default function reducer(state = {}, action) {
@@ -7,6 +13,13 @@ export default function reducer(state = {}, action) {
       return {
          ...state,
         categories: action.payload
+      }
+    case "SWIPE_SUBJECT":
+      return {
+         ...state,
+        categories: {
+          ...state.categories
+        }
       }
     // case "FETCH_SUBJECT_SUCCESS":
     // // console.log("action.payload",action.payload)

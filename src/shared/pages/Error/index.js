@@ -8,7 +8,7 @@ export default class Error extends Component {
       <span>
         <Nav/>
         <p> 404 Error </p>
-        <p> Page not found </p>
+        <p> Page doesn't exist </p>
       </span>
     )
   }

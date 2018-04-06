@@ -37,7 +37,6 @@ app.get("*", (req, res, next) => {
     return acc;
   }, []);
 
-  console.log("promises",promises)
 
   Promise.all(promises)
     .then(() => {

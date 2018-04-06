@@ -2,6 +2,7 @@ import React from "react";
 import "./style/CategoriesList.css";
 import humanize from 'string-humanize'
 import { Link, NavLink } from "react-router-dom";
+import {cleanUrl} from "/shared/utils"
 
 const CategoriesList = ({ categories }) => {
   return <div className="categories-list">
@@ -9,7 +10,7 @@ const CategoriesList = ({ categories }) => {
         {
           categories.map(category =>
             <div key={category.title}>
-              <Link to={`/categories/${category.title.replace(/\s+/g, '-').toLowerCase()}`}>
+              <Link to={`/categories/${cleanUrl(category.title)}`}>
                 {category.title}
               </Link>
             </div>
