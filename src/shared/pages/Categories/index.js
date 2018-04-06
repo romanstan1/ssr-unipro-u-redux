@@ -21,7 +21,7 @@ class Categories extends Component {
     return (
       <span>
         <Nav/>
-        <CategoriesList categories={categories} />
+        {categories? <CategoriesList categories={categories} /> : null}
       </span>
     )
   }

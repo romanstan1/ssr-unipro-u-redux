@@ -5,34 +5,50 @@ import { Link } from "react-router-dom";
 import { fetchSubject } from "/shared/store/modules/api";
 import Nav from '/shared/components/Nav'
 import SubjectContent from './SubjectContent'
+import { fetchCategories } from "/shared/store/modules/api";
 
 class Subject extends Component {
-  // static initialAction() {
-  //   // return fetchCategories();
+  // static initialAction(url) {
+  //   return fetchSubject(url)
   // }
 
-  componentDidMount() {
-    // if (!this.props.categories) {
-    //   this.props.dispatch(Categories.initialAction());
-    // }
+  static initialAction() {
+    return fetchCategories();
   }
 
-  render() {
-    // console.log('props: ', this.props.match.params.slug)
+  componentDidMount() {
+    if (!this.props.categories) {
+      this.props.dispatch(Subject.initialAction());
+    }
+  }
 
-    const { subject } = this.props
+
+  // componentDidMount() {
+  //   console.log("this.props.subjects: ",this.props.subjects)
+  //   const subjectNames = Object.keys(this.props.subjects)
+  //   const url = this.props.match.url
+  //   const slug = url.split("/").pop()
+  //
+  //   // if (subjectNames.includes(slug)) {
+  //   //   // console.log("componentDidMount dispatch")
+  //   //   this.props.dispatch(Subject.initialAction(url))
+  //   // }
+  //
+  // }
+
+  render() {
+    const { subjects } = this.props
+    // console.log("subjects: ",subjects)
     return (
       <span>
         <Nav/>
         <Link to='/categories'>Back to categories</Link>
-        <SubjectContent subject={subject}/>
-
-        {/* <CategoriesList categories={categories} /> */}
+        {/* <SubjectContent subjects={subjects}/> */}
       </span>
     )
   }
 }
 
 export default connect(state => ({
-  subject: state.subject
+  subjects: state.subjects
 }))(Subject);
