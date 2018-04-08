@@ -3,7 +3,7 @@ import "./style/Subject.css";
 import humanize from 'string-humanize'
 import { Link, NavLink } from "react-router-dom";
 
-const SubjectContent = ({ subject, nextSubject }) =>
+const SubjectContent = ({ categoryTitle, subject, swipeSubject }) =>
   <div className="subject-content">
 
     <div className="list">
@@ -15,8 +15,8 @@ const SubjectContent = ({ subject, nextSubject }) =>
     </div>
 
     <div className='buttons'>
-      <div onClick={nextSubject}>Previous</div>
-      <div onClick={nextSubject}>Next</div>
+      <div onClick={() => swipeSubject(categoryTitle, -1, subject.title)}>Previous</div>
+      <div onClick={() => swipeSubject(categoryTitle, 1, subject.title)}>Next</div>
     </div>
 
   </div>

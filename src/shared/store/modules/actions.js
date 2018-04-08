@@ -11,6 +11,11 @@ export const receivedSubject = (subject, slug) => ({
   payload: {subject, slug}
 })
 
+export const swipeSubject = (categoryTitle, nextIndex) => ({
+  type: "SWIPE_SUBJECT",
+  payload: {categoryTitle, nextIndex}
+})
+
 export const categoriesError = () => ({
   type: "FETCH_CATEGORIES_FAILURE"
 })

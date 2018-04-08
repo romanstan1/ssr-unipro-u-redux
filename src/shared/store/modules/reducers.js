@@ -1,9 +1,4 @@
 
-// const initialState = {
-//   categories: {
-//
-//   }
-// }
 
 
 // Reducer
@@ -17,19 +12,17 @@ export default function reducer(state = {}, action) {
     case "SWIPE_SUBJECT":
       return {
          ...state,
-        categories: {
-          ...state.categories
-        }
+        categories: state.categories.map(category => (
+          category.title === action.payload.categoryTitle?
+          {
+            ...category,
+            index: action.payload.nextIndex > category.subjects.length - 1 ? 0 :
+                   action.payload.nextIndex < 0 ? category.subjects.length - 1 :
+                   action.payload.nextIndex
+          }
+          : category
+        ))
       }
-    // case "FETCH_SUBJECT_SUCCESS":
-    // // console.log("action.payload",action.payload)
-    //   return {
-    //      ...state,
-    //     subjects: {
-    //       ...state.subjects,
-    //       [action.payload.slug]: action.payload.subject
-    //     }
-    //   }
     default:
       return state;
   }

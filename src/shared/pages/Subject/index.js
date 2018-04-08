@@ -8,6 +8,7 @@ import SubjectContent from './SubjectContent'
 import NoSubjectFound from './NoSubjectFound'
 import NoCategoryFound from './NoCategoryFound'
 import { fetchCategories } from "/shared/store/modules/api";
+import { swipeSubject } from "/shared/store/modules/actions";
 import {cleanUrl} from "/shared/utils"
 import { Redirect } from 'react-router-dom'
 import "./style/CategoriesList.css";
@@ -25,8 +26,12 @@ class Subject extends Component {
     }
   }
 
-  nextSubject = () => {
-    console.log("nextSubject")
+  swipeSubject = (categoryTitle, direction, subjectTitle) => {
+    const currentIndex = this.props.categories
+      .find(category => categoryTitle === category.title).subjects
+      .findIndex(subject => subjectTitle === subject.title)
+    const nextIndex = currentIndex + direction
+    this.props.dispatch(swipeSubject(categoryTitle,nextIndex))
   }
 
   render() {
@@ -35,15 +40,51 @@ class Subject extends Component {
 
     if(categories) {
       var category = categories.find(category => slug === cleanUrl(category.title))
+      // console.log("cat index: ",category.index)
     }
 
     if(category && category.subjects) {
+
       var subject = category.subjects.find(subject => title === cleanUrl(subject.title))
+
+      if(typeof category.index === 'number') {
+        // check index against current slug, redirect to slug url if they do not match
+
+        // console.log("category && subject",category, subject)
+        // console.log("")
+        // console.log("category.index: ", category.index)
+
+        var newSubject = category.subjects.find((subject, index) => index === category.index)
+        //
+        // console.log("")
+        // console.log("newSubject: ",newSubject)
+        // const currentIndex = category.subjects
+        //   .findIndex(subject => subject.title)
+
+        // console.log("currentIndex",currentIndex)
+
+        // var redirect = '/categories/' + slug + '/' + cleanUrl(subject.title)
+
+        // <Redirect to={redirect}/>
+      }
+
+      // if(category.index) {
+      //   var subject = category.subjects.find((subject, index) => index === category.index)
+      // } else {
+      //   subject = category.subjects.find(subject => title === cleanUrl(subject.title))
+      // }
+
+
     }
 
     if (category && category.subjects && defaultSubject) {
+      console.log("defaultSubject: ",defaultSubject)
       subject = category.subjects.find((subject,index) => index === 0)
       var redirect = '/categories/' + slug + '/' + cleanUrl(subject.title)
+    }
+
+    if(newSubject && subject.title !== newSubject.title) {
+      return <Redirect to={'/categories/' + slug + '/' + cleanUrl(newSubject.title)}/>
     }
 
     return (
@@ -54,7 +95,7 @@ class Subject extends Component {
         {
           category?
             subject?
-            <SubjectContent nextSubject={this.nextSubject} subject={subject}/> :
+            <SubjectContent categoryTitle={category.title} swipeSubject={this.swipeSubject} subject={subject}/> :
             <NoSubjectFound
               categoryTitle={category.title}
               categoryUrl={cleanUrl(category.title)}

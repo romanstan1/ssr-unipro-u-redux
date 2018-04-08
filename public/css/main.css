@@ -17,22 +17,6 @@ nav {
     color: black; }
     nav a.active {
       color: white; }
-div.categories-list {
-  background-color: #f6f6ef; }
-  div.categories-list div.list {
-    padding: 10px 0px; }
-    div.categories-list div.list a {
-      display: block;
-      padding: 10px 20px;
-      text-transform: capitalize;
-      text-decoration: none;
-      color: black; }
-      div.categories-list div.list a:hover {
-        background-color: grey; }
-
-.header {
-  background-color: #6b32e1;
-  padding: 3px; }
 div.subject-content {
   background-color: #f6f6ef;
   margin: 10px;
@@ -109,5 +93,21 @@ div.login {
       -ms-flex-pack: center;
           justify-content: center;
   height: 40vh; }
+div.categories-list {
+  background-color: #f6f6ef; }
+  div.categories-list div.list {
+    padding: 10px 0px; }
+    div.categories-list div.list a {
+      display: block;
+      padding: 10px 20px;
+      text-transform: capitalize;
+      text-decoration: none;
+      color: black; }
+      div.categories-list div.list a:hover {
+        background-color: grey; }
+
+.header {
+  background-color: #6b32e1;
+  padding: 3px; }
 
 /*# sourceMappingURL=main.css.map*/
